@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:picture_review_and_move"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Focusable="True"
+        ResizeMode="CanResizeWithGrip"
+        TextElement.FontSize="18"
+        Title="Picture Reviewer and Mover" Height="500" Width="680">
+    <DockPanel Margin="4">
+        <Border DockPanel.Dock="Bottom" Margin="4,4">
+            <DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Label>Current image: </Label>
+                    <TextBlock />
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Label MinWidth="150">Image directory:</Label>
+                    <TextBox />
+                </DockPanel>
+                <DockPanel>
+                    <Label MinWidth="150">Move directory:</Label>
+                    <TextBox />
+                </DockPanel>
+            </DockPanel>
+        </Border>
+        <Border>
+            <Image />
+        </Border>
+    </DockPanel>
 </Window>
