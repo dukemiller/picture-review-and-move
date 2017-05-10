@@ -12,6 +12,50 @@ namespace picture_review_and_move
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        private string _loadPath = "Source: ";
+
+        private string _movePath = "Source: ";
+
+        private string _currentImagePath;
+
+        public MainWindowViewModel()
+        {
+        }
+
+        // 
+
+        public string CurrentImagePath
+        {
+            get => _currentImagePath;
+            set
+            {
+                _currentImagePath = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string LoadPath
+        {
+            get => _loadPath;
+            set
+            {
+                _loadPath = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string MovePath
+        {
+            get => _movePath;
+            set
+            {
+                _movePath = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // 
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

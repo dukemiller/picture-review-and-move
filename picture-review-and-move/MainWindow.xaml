@@ -9,25 +9,29 @@
         ResizeMode="CanResizeWithGrip"
         TextElement.FontSize="18"
         Title="Picture Reviewer and Mover" Height="500" Width="680">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
     <DockPanel Margin="4">
         <Border DockPanel.Dock="Bottom" Margin="4,4">
             <DockPanel>
                 <DockPanel DockPanel.Dock="Top">
                     <Label>Current image: </Label>
-                    <TextBlock />
+                    <TextBlock Padding="5" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                               ToolTip="{Binding CurrentImagePath}" Text="{Binding CurrentImagePath}" />
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top">
                     <Label MinWidth="150">Image directory:</Label>
-                    <TextBox />
+                    <TextBox VerticalAlignment="Center" Text="{Binding LoadPath, UpdateSourceTrigger=PropertyChanged}" />
                 </DockPanel>
                 <DockPanel>
                     <Label MinWidth="150">Move directory:</Label>
-                    <TextBox />
+                    <TextBox VerticalAlignment="Center" Text="{Binding MovePath, UpdateSourceTrigger=PropertyChanged}" />
                 </DockPanel>
             </DockPanel>
         </Border>
-        <Border>
-            <Image />
+        <Border Background="Black">
+            <Image Source="{Binding CurrentImagePath}" />
         </Border>
     </DockPanel>
 </Window>
