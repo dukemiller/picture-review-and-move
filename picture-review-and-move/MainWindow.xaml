@@ -39,7 +39,7 @@
             </DockPanel>
         </Border>
         <Border Background="Black">
-            <Image Source="{Binding CurrentImagePath}" />
+            <Image Source="{Binding CurrentImagePath, Converter={StaticResource UriToCachedConverter}}" />
         </Border>
     </DockPanel>
 </Window>

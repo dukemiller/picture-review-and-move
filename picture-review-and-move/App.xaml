@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:picture_review_and_move"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+         <local:UriToCachedImageConverter x:Key="UriToCachedConverter"/>
     </Application.Resources>
 </Application>
