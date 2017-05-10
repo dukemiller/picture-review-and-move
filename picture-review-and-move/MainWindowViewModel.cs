@@ -129,6 +129,8 @@ namespace picture_review_and_move
                 var previousPath = CurrentImagePath;
                 var newPath = Path.Combine(MovePath, Path.GetFileName(CurrentImagePath));
                 Images.Remove(CurrentImagePath);
+                if (_currentIndex >= Images.Count)
+                    _currentIndex = Images.Count - 1;
                 CurrentImagePath = Images[_currentIndex];
                 File.Move(previousPath, newPath);
             }
