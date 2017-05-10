@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:picture_review_and_move"
         mc:Ignorable="d"
+        MouseDown="MainWindow_OnMouseDown"
+        Name="MainElement"
+        Background="DarkGray"
         Focusable="True"
         ResizeMode="CanResizeWithGrip"
         TextElement.FontSize="18"
@@ -14,7 +17,7 @@
     </Window.DataContext>
     <DockPanel Margin="4">
         <Border DockPanel.Dock="Bottom" Margin="4,4">
-            <DockPanel>
+            <DockPanel Background="LightGray">
                 <DockPanel DockPanel.Dock="Top">
                     <Label>Current image: </Label>
                     <TextBlock Padding="5" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
