@@ -16,10 +16,19 @@ namespace picture_review_and_move
 
         private string _movePath = "Source: ";
 
+        private ObservableCollection<string> _images = new ObservableCollection<string>();
+
         private string _currentImagePath;
+
+        private int _currentIndex = 0;
+
+        private static readonly string[] Extensions = {"jpg", "jpeg", "png", "gif"};
 
         public MainWindowViewModel()
         {
+            NextCommand = new RelayCommand(Next);
+            PreviousCommand = new RelayCommand(Previous);
+            MoveImageCommand = new RelayCommand(MoveImage);
         }
 
         // 
@@ -34,6 +43,16 @@ namespace picture_review_and_move
             }
         }
 
+        public ObservableCollection<string> Images
+        {
+            get => _images;
+            set
+            {
+                _images = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string LoadPath
         {
             get => _loadPath;
@@ -41,6 +60,16 @@ namespace picture_review_and_move
             {
                 _loadPath = value;
                 OnPropertyChanged();
+                if (Directory.Exists(LoadPath))
+                {
+                    Images = new ObservableCollection<string>(Directory
+                        .GetFiles(LoadPath)
+                        .Where(file => Extensions.Any(ext => file.ToLower().EndsWith(ext)))
+                    );
+                    _currentIndex = 0;
+                    if (Images.Count > 0)
+                        CurrentImagePath = Images[_currentIndex];
+                }
             }
         }
 
@@ -56,6 +85,45 @@ namespace picture_review_and_move
 
         // 
 
+        public RelayCommand NextCommand { get; set; }
+
+        public RelayCommand PreviousCommand { get; set; }
+
+        public RelayCommand MoveImageCommand { get; set; }
+
+        // 
+
+        private void Next()
+        {
+            if (Images.Count > 1)
+            {
+                _currentIndex = ++_currentIndex % Images.Count;
+                CurrentImagePath = Images[_currentIndex];
+            }
+        }
+
+        private void Previous()
+        {
+            if (Images.Count > 1)
+            {
+                _currentIndex = --_currentIndex < 0 ? Images.Count - 1 : _currentIndex;
+                CurrentImagePath = Images[_currentIndex];
+            }
+        }
+
+        private void MoveImage()
+        {
+            if (Directory.Exists(MovePath) && CurrentImagePath != null && File.Exists(CurrentImagePath))
+            {
+                var previousPath = CurrentImagePath;
+                var newPath = Path.Combine(MovePath, Path.GetFileName(CurrentImagePath));
+                Images.Remove(CurrentImagePath);
+                CurrentImagePath = Images[_currentIndex];
+                File.Move(previousPath, newPath);
+            }
+        }
+
+        // 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
