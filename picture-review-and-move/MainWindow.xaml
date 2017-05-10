@@ -15,6 +15,11 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="Right" Command="{Binding NextCommand}" />
+        <KeyBinding Key="Left" Command="{Binding PreviousCommand}" />
+        <KeyBinding Key="Return" Command="{Binding MoveImageCommand}" />
+    </Window.InputBindings>
     <DockPanel Margin="4">
         <Border DockPanel.Dock="Bottom" Margin="4,4">
             <DockPanel Background="LightGray">
