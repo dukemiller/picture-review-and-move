@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using picture_review_and_move.Annotations;
+using picture_review_and_move.Properties;
 
 namespace picture_review_and_move
 {
@@ -29,6 +30,8 @@ namespace picture_review_and_move
             NextCommand = new RelayCommand(Next);
             PreviousCommand = new RelayCommand(Previous);
             MoveImageCommand = new RelayCommand(MoveImage);
+            LoadPath = Settings.Default.LoadPath;
+            MovePath = Settings.Default.MovePath;
         }
 
         // 
@@ -62,6 +65,12 @@ namespace picture_review_and_move
                 OnPropertyChanged();
                 if (Directory.Exists(LoadPath))
                 {
+                    if (!Settings.Default.LoadPath.Equals(LoadPath))
+                    {
+                        Settings.Default.LoadPath = LoadPath;
+                        Settings.Default.Save();
+                    }
+                    
                     Images = new ObservableCollection<string>(Directory
                         .GetFiles(LoadPath)
                         .Where(file => Extensions.Any(ext => file.ToLower().EndsWith(ext)))
@@ -80,6 +89,11 @@ namespace picture_review_and_move
             {
                 _movePath = value;
                 OnPropertyChanged();
+                if (Directory.Exists(MovePath) && !Settings.Default.MovePath.Equals(MovePath))
+                {
+                    Settings.Default.MovePath = MovePath;
+                    Settings.Default.Save();
+                }
             }
         }
 
